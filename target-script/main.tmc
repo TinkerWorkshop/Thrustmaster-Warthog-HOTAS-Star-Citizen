@@ -1,4 +1,5 @@
-
+// StarCitizen Main control script
+// Version 1.0.0
 
 include "target.tmh"
 

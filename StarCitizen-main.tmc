@@ -1,0 +1,112 @@
+
+
+include "target.tmh"
+
+//program startup
+int main() {
+
+	Configure(&HCougar, MODE_EXCLUDED);
+	Configure(&T16000, MODE_EXCLUDED);
+	Configure(&LMFD, MODE_EXCLUDED);
+	Configure(&RMFD, MODE_EXCLUDED);
+	
+	// declare the event handler, return on error
+	if(Init(&EventHandle)) return 1;
+	
+	SetKBRate(32, 50);
+	SetKBLayout(KB_FR);
+	
+	// JOYSTICK DIRECTIONAL
+	
+	MapAxis(&Joystick, JOYX, DX_X_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+	MapAxis(&Joystick, JOYY, DX_Y_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+
+	SetSCurve(&Joystick, JOYX, 0, 0, 0, 0, 0);
+	SetSCurve(&Joystick, JOYY, 0, 0, 0, 0, 0);
+	
+	// JOYSTICK KEYS
+
+	MapKey(&Joystick, S1, DX4);
+	MapKey(&Joystick, S2, DX2);
+	MapKey(&Joystick, S3, PULSE+USB[73]);
+	MapKey(&Joystick, S4, PULSE+USB[57]);
+	
+	MapKey(&Joystick, TG1, DX1);
+	MapKey(&Joystick, TG2, 0);
+	
+	MapKey(&Joystick, H2U, PULSE+USB[82]);
+	MapKey(&Joystick, H2R, PULSE+USB[79]);
+	MapKey(&Joystick, H2D, PULSE+USB[81]);
+	MapKey(&Joystick, H2L, PULSE+USB[80]);
+	
+	MapKey(&Joystick, H3U, PULSE+USB[21]);
+	MapKey(&Joystick, H3R, PULSE+USB[11]);
+	MapKey(&Joystick, H3D, PULSE+USB[10]);
+	MapKey(&Joystick, H3L, PULSE+USB[23]);
+	
+	MapKey(&Joystick, H4U, PULSE+USB[27]);
+	MapKey(&Joystick, H4P, PULSE+USB[29]);
+	
+	// THROTTLE DIRECTIONAL
+	
+	MapAxis(&Throttle, SCX, DX_ZROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+	MapAxis(&Throttle, SCY, DX_YROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+	MapAxis(&Throttle, THR_RIGHT, DX_Z_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+	MapAxis(&Throttle, THR_LEFT, 0, AXIS_NORMAL, MAP_ABSOLUTE);
+	MapAxis(&Throttle, THR_FC, DX_SLIDER_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+	
+	SetSCurve(&Throttle, SCX, 0, 0, 0, 2, 0);
+	SetSCurve(&Throttle, SCY, 0, 0, 0, 0, 0);
+	SetSCurve(&Throttle, THR_RIGHT, 0, 0, 0, 0, 0);
+	SetSCurve(&Throttle, THR_LEFT, 0, 0, 0, 0, 0);
+	SetSCurve(&Throttle, THR_FC, 0, 0, 0, 0, 0);
+
+	// THROTTLE KEYS
+
+	MapKey(&Throttle, SC, USB[40]);
+
+	MapKey(&Throttle, MSP, L_SHIFT);
+
+	MapKey(&Throttle, SPDF, USB[44]);
+	MapKey(&Throttle, SPDB, USB[44]);
+	
+	MapKey(&Throttle, CHF, PULSE+USB[52]);
+	MapKey(&Throttle, CHB, PULSE+USB[51]);
+
+	MapKey(&Throttle, RDRDIS, PULSE+USB[54]);
+	
+	MapKey(&Throttle, BSF, PULSE+USB[59]);
+	MapKey(&Throttle, BSB, PULSE+USB[61]);
+	MapKey(&Throttle, BSM, PULSE+USB[60]);
+
+
+	// Testing Things
+	
+	//MapKey(&Throttle, LTB, CHAIN(
+	//	LED(&Throttle, LED_INTENSITY, 43), 
+	//		D(), 
+	//	LED(&Throttle, LED_INTENSITY, 129))
+	//);
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+//event handler
+int EventHandle(int type, alias o, int x) {
+
+    DefaultMapping(&o, x);
+	
+	//add event handling code here
+
+}

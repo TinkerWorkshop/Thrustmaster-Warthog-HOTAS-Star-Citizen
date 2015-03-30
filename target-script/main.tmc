@@ -1,9 +1,15 @@
 // StarCitizen Main control script
 // Version 1.0.0
+// Github link: https://github.com/TinkerWorkshop/Thrustmaster-Warthog-HOTAS-Star-Citizen
 
+
+// Factory script
 include "target.tmh";
 
+
+// Game definition includes
 include "control.tmh";
+
 
 //program startup
 int main() {

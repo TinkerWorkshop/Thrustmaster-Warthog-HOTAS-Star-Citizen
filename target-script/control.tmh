@@ -1,71 +1,171 @@
 
-int set_events_stick() {
+//--------------------------------------------------------------------
+											// DEFINES AND VARIABLES
+//--------------------------------------------------------------------
 
-	// JOYSTICK DIRECTIONAL
+define EMPTY 0; // Define empty event
+
+//--------------------------------------------------------------------
+
+//--------------------------------------------------------------------
+int set_events_stick() {					// JOYSTICK SETTINGS
+//--------------------------------------------------------------------
 	
 	MapAxis(&Joystick, JOYX, DX_X_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
 	MapAxis(&Joystick, JOYY, DX_Y_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
-
 	SetSCurve(&Joystick, JOYX, 0, 0, 0, 0, 0);
 	SetSCurve(&Joystick, JOYY, 0, 0, 0, 0, 0);
-	
-	// JOYSTICK KEYS
 
-	MapKey(&Joystick, S1, DX4);
-	MapKey(&Joystick, S2, DX2);
-	MapKey(&Joystick, S3, PULSE+USB[73]);
-	MapKey(&Joystick, S4, PULSE+USB[57]);
+	MapKey(&Joystick, TG1, DX1); // Gun Trigger - Primary
+	MapKey(&Joystick, TG2, 0); // Gun Trigger - Secondary
+
+	MapKey(&Joystick, S1, DX4); // Master mode Control Button
+	MapKey(&Joystick, S2, DX2); // Weapons Release Button
+	MapKey(&Joystick, S3, PULSE+USB[73]); // Nosewheel Steerin Button
+	MapKey(&Joystick, S4, PULSE+USB[57]); // Paddle Switch
 	
-	MapKey(&Joystick, TG1, DX1);
-	MapKey(&Joystick, TG2, 0);
-	
+	// Trim Switch
+	MapKey(&Joystick, H1U, 0);
+	MapKey(&Joystick, H1R, 0);
+	MapKey(&Joystick, H1D, 0);
+	MapKey(&Joystick, H1L, 0);
+
+	// TMS - Target Management Switch
 	MapKey(&Joystick, H2U, PULSE+USB[82]);
 	MapKey(&Joystick, H2R, PULSE+USB[79]);
 	MapKey(&Joystick, H2D, PULSE+USB[81]);
 	MapKey(&Joystick, H2L, PULSE+USB[80]);
 	
+	// DMS - Data Management Switch
 	MapKey(&Joystick, H3U, PULSE+USB[21]);
 	MapKey(&Joystick, H3R, PULSE+USB[11]);
 	MapKey(&Joystick, H3D, PULSE+USB[10]);
 	MapKey(&Joystick, H3L, PULSE+USB[23]);
 	
+	// CMS - Countermeasures Management Switch
 	MapKey(&Joystick, H4U, PULSE+USB[27]);
-	MapKey(&Joystick, H4P, PULSE+USB[29]);
+	MapKey(&Joystick, H4R, 0);
+	MapKey(&Joystick, H4D, 0);
+	MapKey(&Joystick, H4L, 0);
+	MapKey(&Joystick, H4P, PULSE+USB[29]); // push
 
-}
+//--------------------------------------------------------------------
+}// end joystick settings
 
-int set_events_throttle() {
 
-	// THROTTLE DIRECTIONAL
-	
-	MapAxis(&Throttle, SCX, DX_ZROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
-	MapAxis(&Throttle, SCY, DX_YROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
-	MapAxis(&Throttle, THR_RIGHT, DX_Z_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+
+//--------------------------------------------------------------------
+int set_events_throttle() {					// THROTTLE SETTINGS
+//--------------------------------------------------------------------
+
+//--------------------------------------------------------------------
+//	Throttle Left
+//--------------------------------------------------------------------
+
 	MapAxis(&Throttle, THR_LEFT, 0, AXIS_NORMAL, MAP_ABSOLUTE);
-	MapAxis(&Throttle, THR_FC, DX_SLIDER_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
-	
-	SetSCurve(&Throttle, SCX, 0, 0, 0, 2, 0);
-	SetSCurve(&Throttle, SCY, 0, 0, 0, 0, 0);
-	SetSCurve(&Throttle, THR_RIGHT, 0, 0, 0, 0, 0);
 	SetSCurve(&Throttle, THR_LEFT, 0, 0, 0, 0, 0);
-	SetSCurve(&Throttle, THR_FC, 0, 0, 0, 0, 0);
 
-	// THROTTLE KEYS
+	// Left Throttle Button
+	MapKey(&Throttle, LTB, 0);
 
-	MapKey(&Throttle, SC, USB[40]);
+	// Pinky Switch
+	MapKey(&Throttle, PSF, 0);
+	MapKey(&Throttle, PSM, 0);
+	MapKey(&Throttle, PSB, 0);
 
-	MapKey(&Throttle, MSP, L_SHIFT);
+//--------------------------------------------------------------------
+//	Throttle Right
+//--------------------------------------------------------------------
 
+	MapAxis(&Throttle, THR_RIGHT, DX_Z_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+	SetSCurve(&Throttle, THR_RIGHT, 0, 0, 0, 0, 0);
+
+	// Slew Control
+	MapAxis(&Throttle, SCX, DX_ZROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+	SetSCurve(&Throttle, SCX, 0, 0, 0, 2, 0);
+	MapAxis(&Throttle, SCY, DX_YROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+	SetSCurve(&Throttle, SCY, 0, 0, 0, 0, 0);
+	MapKey(&Throttle, SC, USB[40]); // push
+
+	// Coolie Switch
+	MapKey(&Throttle, CSU, 0);
+	MapKey(&Throttle, CSR, 0);
+	MapKey(&Throttle, CSD, 0);
+	MapKey(&Throttle, CSL, 0);
+
+	// MIC Switch
+	MapKey(&Throttle, MSU, 0);
+	MapKey(&Throttle, MSR, 0);
+	MapKey(&Throttle, MSD, 0);
+	MapKey(&Throttle, MSL, 0);
+	MapKey(&Throttle, MSP, L_SHIFT); // push
+
+	// Speedbrake
 	MapKey(&Throttle, SPDF, USB[44]);
+	MapKey(&Throttle, SPDM, 0);
 	MapKey(&Throttle, SPDB, USB[44]);
-	
-	MapKey(&Throttle, CHF, PULSE+USB[52]);
-	MapKey(&Throttle, CHB, PULSE+USB[51]);
 
-	MapKey(&Throttle, RDRDIS, PULSE+USB[54]);
-	
+	// Boat Switch
 	MapKey(&Throttle, BSF, PULSE+USB[59]);
 	MapKey(&Throttle, BSB, PULSE+USB[61]);
 	MapKey(&Throttle, BSM, PULSE+USB[60]);
 
-}
+	// China Hat
+	MapKey(&Throttle, CHF, PULSE+USB[52]);
+	MapKey(&Throttle, CHM, 0);
+	MapKey(&Throttle, CHB, PULSE+USB[51]);
+
+//--------------------------------------------------------------------
+
+	// Engine Fuel Flow Left
+	MapKey(&Throttle, EFLNORM, 0);
+	MapKey(&Throttle, EFLOVER, 0);
+
+	// Engine Fuel Flow Right
+	MapKey(&Throttle, EFRNORM, 0);
+	MapKey(&Throttle, EFROVER, 0);
+
+	// Engine Operate Left
+	MapKey(&Throttle, EOLIGN, 0);
+	MapKey(&Throttle, EOLNORM, 0);
+	MapKey(&Throttle, EOLMOTOR, 0);
+
+	// Engine Operate Right
+	MapKey(&Throttle, EORIGN, 0);
+	MapKey(&Throttle, EORNORM, 0);
+	MapKey(&Throttle, EORMOTOR, 0);
+
+//--------------------------------------------------------------------
+
+	// APU Start
+	MapKey(&Throttle, APUON, 0);
+	MapKey(&Throttle, APUOFF, 0);
+
+	// Landing Gear Horn Silence Button
+	MapKey(&Throttle, LDGH, 0);
+
+	// Throttle Friction Control
+	MapAxis(&Throttle, THR_FC, DX_SLIDER_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+	SetSCurve(&Throttle, THR_FC, 0, 0, 0, 0, 0);
+
+//--------------------------------------------------------------------
+
+	// EAC
+	MapKey(&Throttle, EACON, 0);
+	MapKey(&Throttle, EACOFF, 0);
+
+	// RDR ALT
+	MapKey(&Throttle, RDRNRM, 0);
+	MapKey(&Throttle, RDRDIS, PULSE+USB[54]);
+
+	// Autopilot Engage/Disengage
+	MapKey(&Throttle, APENG, 0);
+	MapKey(&Throttle, APDIS, 0);
+
+	// Autopilot Select Switch
+	MapKey(&Throttle, APPAT, 0);
+	MapKey(&Throttle, APAH, 0);
+	MapKey(&Throttle, APALT, 0);
+	
+//--------------------------------------------------------------------
+} // end throttle settings
